@@ -1,0 +1,11 @@
+{
+  "name": "history_personas_ai",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
