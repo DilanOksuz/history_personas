@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>History Personas AI</title>
+    <link rel="stylesheet" href="src/styles/" />
     <base href="/" />
     <style>
       body {
@@ -38,6 +39,122 @@
       <a href="/settings" data-link>Ayarlar</a>
       <a href="/yanlis-yol" data-link>404 Test</a>
     </header>
+    <link rel="stylesheet" href="src/styles/header.css" />
+
+    <header class="topbar">
+      <div class="brand">
+        <img
+          src="assets/logo.png"
+          alt="Echoes of History Logo"
+          width="20"
+          height="20"
+        />
+        <span class="brand-title">Echoes of History</span>
+      </div>
+
+      <nav class="nav" aria-label="Main">
+        <!-- HASH ROUTER: href'ler #/.. ve data-route ile -->
+        <a
+          href="#/landing"
+          class="nav-link"
+          data-route="/landing"
+          data-i18n="nav.home"
+          >Home</a
+        >
+        <a
+          href="#/explore"
+          class="nav-link"
+          data-route="/explore"
+          data-i18n="nav.explore"
+          >Explore</a
+        >
+        <a
+          href="#/chat"
+          class="nav-link"
+          data-route="/chat"
+          data-i18n="nav.my_echoes"
+          >My Echoes</a
+        >
+        <a
+          href="#/community"
+          class="nav-link"
+          data-route="/community"
+          data-i18n="nav.community"
+          >Community</a
+        >
+      </nav>
+
+      <div class="actions">
+        <button
+          id="btn-theme"
+          class="icon-btn"
+          aria-pressed="false"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          🌙
+        </button>
+        <button id="btn-lang" class="pill" aria-label="Language">
+          <span id="lang-current">EN</span>
+        </button>
+
+        <div class="dropdown" data-dropdown>
+          <button
+            class="icon-btn"
+            data-dropdown-trigger
+            aria-expanded="false"
+            aria-controls="menu-settings"
+            aria-label="Settings"
+          >
+            ⚙️
+          </button>
+          <div id="menu-settings" class="menu" role="menu" aria-hidden="true">
+            <a
+              role="menuitem"
+              tabindex="-1"
+              href="#/settings"
+              data-route="/settings"
+              >Settings</a
+            >
+            <button role="menuitem" tabindex="-1" id="clear-history">
+              Clear All Chats
+            </button>
+          </div>
+        </div>
+
+        <div class="dropdown" data-dropdown>
+          <button
+            class="avatar-btn"
+            data-dropdown-trigger
+            aria-expanded="false"
+            aria-controls="menu-profile"
+            aria-label="Profile menu"
+          >
+            <img id="avatar-img" src="assets/avatar_demo.jpg" alt="" />
+          </button>
+          <div
+            id="menu-profile"
+            class="menu right"
+            role="menu"
+            aria-hidden="true"
+          >
+            <div class="menu-header" id="user-name">User</div>
+            <a
+              role="menuitem"
+              tabindex="-1"
+              href="#/profile"
+              data-route="/profile"
+              >My Profile</a
+            >
+            <button role="menuitem" tabindex="-1" id="logout">Log out</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="app" class="container"></main>
+
+    <script type="module" src="src/header.js"></script>
 
     <main id="app"></main>
 
