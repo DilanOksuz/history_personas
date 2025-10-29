@@ -1,4 +1,9 @@
-export default [
+// src/data/personas.js
+
+// Not: avatar yollarını "assets/personas/..." olarak tuttuk.
+// Görseli kullanırken: img.src = asset(p.avatar)
+
+const PERSONAS = [
   {
     id: "einstein",
     name: "Albert Einstein",
@@ -6,7 +11,7 @@ export default [
     cutoff_year: 1955,
     tags: ["physics", "relativity", "science"],
     bio: "Theoretical physicist known for the theory of relativity.",
-    avatar: "public/assets/personas/einstein.png",
+    avatar: "assets/personas/einstein.png",
   },
   {
     id: "curie",
@@ -15,7 +20,7 @@ export default [
     cutoff_year: 1934,
     tags: ["chemistry", "radioactivity", "science"],
     bio: "Pioneer in radioactivity, first woman to win a Nobel Prize.",
-    avatar: "public/assets/personas/curie.png",
+    avatar: "assets/personas/curie.png",
   },
   {
     id: "davinci",
@@ -24,7 +29,7 @@ export default [
     cutoff_year: 1519,
     tags: ["art", "engineering", "renaissance"],
     bio: "Renaissance artist and polymath.",
-    avatar: "public/assets/personas/davinci.png",
+    avatar: "assets/personas/davinci.png",
   },
   {
     id: "cleopatra",
@@ -33,7 +38,7 @@ export default [
     cutoff_year: -30,
     tags: ["egypt", "politics"],
     bio: "Last active ruler of the Ptolemaic Kingdom of Egypt.",
-    avatar: "public/assets/personas/cleopatra.png",
+    avatar: "assets/personas/cleopatra.png",
   },
   {
     id: "lincoln",
@@ -42,6 +47,9 @@ export default [
     cutoff_year: 1865,
     tags: ["politics", "law"],
     bio: "16th President of the United States.",
-    avatar: "public/assets/personas/lincoln.png",
+    avatar: "assets/personas/lincoln.png",
   },
 ];
+
+export default PERSONAS;
+export { PERSONAS };
