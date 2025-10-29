@@ -1,13 +1,13 @@
 .topbar {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 9;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  background: var(--surface);
+  gap: 16px;
+  background: var(--panel);
   border-bottom: 1px solid var(--border);
+  padding: 8px 12px;
 }
 
 .brand {
@@ -16,61 +16,47 @@
   gap: 10px;
   font-weight: 700;
 }
-.brand-logo,
-.logo {
-  width: 35px;
-  height: 35px;
-  object-fit: contain;
-  border-radius: 6px;
-  display: inline-block;
-}
-.logo {
-  background-image: url("assets/logo.png");
-  background-size: contain;
-  background-repeat: no-repeat;
+
+.brand-title {
+  font-size: 15px;
+  color: var(--text);
 }
 
 .nav {
   display: flex;
-  gap: 8px;
+  gap: 18px;
+  margin-left: 24px;
 }
+
 .nav a {
-  color: var(--muted);
-  font-weight: 600;
-  font-size: 14px;
-  padding: 8px 10px;
+  opacity: 0.85;
+  padding: 6px 10px;
   border-radius: 8px;
-  transition: color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  transition: 0.2s;
 }
+
 .nav a:hover {
-  color: var(--accent);
-  background: rgba(227, 179, 65, 0.1);
+  background: rgba(240, 185, 11, 0.1);
 }
+
 .nav a.active {
-  color: var(--ink);
-  background: var(--chip-active-bg);
-  box-shadow: var(--focus);
+  background: rgba(240, 185, 11, 0.1);
+  outline: 1px solid rgba(240, 185, 11, 0.35);
 }
 
 .user {
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 10px;
 }
-.icon-btn {
-  background: transparent;
-  border: 0;
-  color: var(--ink);
-  cursor: pointer;
-  font-size: 18px;
-}
-.icon-btn:hover {
-  color: var(--accent);
+
+.user .pill,
+.user .icon-btn {
+  transition: 0.2s;
 }
 
-.avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #d9b79a;
+.user .pill:hover,
+.user .icon-btn:hover {
+  opacity: 0.8;
 }
