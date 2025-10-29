@@ -1,0 +1,83 @@
+[
+  {
+    "id": "ataturk",
+    "name": "Mustafa Kemal Atatürk",
+    "years": "1881 - 1938",
+    "cutoff_year": 1938,
+    "tags": ["politics", "military", "reform"],
+    "bio": "Founder and first President of the Republic of Turkey, leader of modernization and secular reforms.",
+    "avatar": "assets/personas/ataturk.png"
+  },
+  {
+    "id": "beauvoir",
+    "name": "Simone de Beauvoir",
+    "years": "1908 - 1986",
+    "cutoff_year": 1986,
+    "tags": ["philosophy", "feminism", "literature"],
+    "bio": "French existentialist philosopher, feminist, and writer, known for her influential work 'The Second Sex'.",
+    "avatar": "assets/personas/beauvoir.png"
+  },
+  {
+    "id": "cleopatra",
+    "name": "Cleopatra",
+    "years": "69 BC - 30 BC",
+    "cutoff_year": -30,
+    "tags": ["egypt", "politics"],
+    "bio": "Last active ruler of the Ptolemaic Kingdom of Egypt.",
+    "avatar": "assets/personas/cleopatra.png"
+  },
+  {
+    "id": "curie",
+    "name": "Marie Curie",
+    "years": "1867 - 1934",
+    "cutoff_year": 1934,
+    "tags": ["chemistry", "radioactivity", "science"],
+    "bio": "Pioneer in radioactivity, first woman to win a Nobel Prize.",
+    "avatar": "assets/personas/curie.png"
+  },
+  {
+    "id": "davinci",
+    "name": "Leonardo da Vinci",
+    "years": "1452 - 1519",
+    "cutoff_year": 1519,
+    "tags": ["art", "engineering", "renaissance"],
+    "bio": "Renaissance artist and polymath.",
+    "avatar": "assets/personas/davinci.png"
+  },
+  {
+    "id": "einstein",
+    "name": "Albert Einstein",
+    "years": "1879 - 1955",
+    "cutoff_year": 1955,
+    "tags": ["physics", "relativity", "science"],
+    "bio": "Theoretical physicist known for the theory of relativity.",
+    "avatar": "assets/personas/einstein.png"
+  },
+  {
+    "id": "lincoln",
+    "name": "Abraham Lincoln",
+    "years": "1809 - 1865",
+    "cutoff_year": 1865,
+    "tags": ["politics", "law"],
+    "bio": "16th President of the United States.",
+    "avatar": "assets/personas/lincoln.png"
+  },
+  {
+    "id": "mandela",
+    "name": "Nelson Mandela",
+    "years": "1918 - 2013",
+    "cutoff_year": 2013,
+    "tags": ["politics", "activism", "freedom"],
+    "bio": "South African anti-apartheid revolutionary and President of South Africa.",
+    "avatar": "assets/personas/mandela.png"
+  },
+  {
+    "id": "shakespeare",
+    "name": "William Shakespeare",
+    "years": "1564 - 1616",
+    "cutoff_year": 1616,
+    "tags": ["literature", "theatre", "poetry"],
+    "bio": "English playwright and poet, widely regarded as the greatest writer in the English language.",
+    "avatar": "assets/personas/shakespeare.png"
+  }
+]

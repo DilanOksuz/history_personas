@@ -1,11 +1,10 @@
-// Hem named export hem default veriyoruz; router her ikisini de destekliyor
-export async function render() {
-  const el = document.createElement("section");
-  el.innerHTML = `
-    <h2>404 — Sayfa bulunamadı</h2>
-    <p>Aradığınız sayfa mevcut değil veya taşınmış olabilir.</p>
-    <p><a href="/" data-link>Anasayfa</a></p>
+export function render(root) {
+  const path = location.hash.replace(/^#/, "");
+  root.innerHTML = `
+    <section class="error">
+      <h1>404 — Sayfa bulunamadı</h1>
+      <p><code>${path}</code> mevcut değil.</p>
+      <p><a href="#/">Anasayfa</a></p>
+    </section>
   `;
-  return el;
 }
-export default render;

@@ -1,82 +1,47 @@
-// History API Router — Geçersiz URL'leri /404'e NORMALİZE eder.
+import { render as renderHome } from "./routes/home.js";
+import { render as renderChat } from "./routes/chat.js";
+import { render as renderSettings } from "./routes/settings.js";
+import { render as render404 } from "./routes/not_found.js";
 
+// route -> render fonksiyonu
 const routes = {
-  "/": () => import("./routes/home.js"),
-  "/home": () => import("./routes/home.js"),
-  "/chat": () => import("./routes/chat.js"),
-  "/settings": () => import("./routes/settings.js"),
-  "/404": () => import("./routes/not_found.js"),
+  "/": renderHome,
+  "/landing": renderHome,
+  "/chat": renderChat,
+  "/settings": renderSettings,
+  // diğerleri bilinmiyorsa 404
 };
 
-function getPath() {
-  let p = location.pathname;
-  if (!p.startsWith("/")) p = "/" + p;
-  if (p !== "/" && p.endsWith("/")) p = p.slice(0, -1);
-  return p;
-}
+export function route() {
+  const root = document.getElementById("app");
+  if (!root) return;
 
-async function renderPath(path) {
-  let exists = Object.prototype.hasOwnProperty.call(routes, path);
-
-  // Geçersiz rota ise URL'yi de /404 yap
-  if (!exists) {
-    if (location.pathname !== "/404") {
-      history.replaceState({}, "", "/404"); // adres çubuğu normalleşsin
-    }
-    path = "/404";
-    exists = true;
-  }
+  const hash = location.hash || "#/";
+  const path = hash.replace(/^#/, "");
+  const handler = routes[path] || render404;
 
   try {
-    const mod = await routes[path]();
-    const renderFn = mod.render || mod.default; // iki export tipini de destekle
-    if (typeof renderFn !== "function")
-      throw new Error(`'${path}' modülünde render() yok`);
-
-    const view = await renderFn();
-    document.getElementById("app").replaceChildren(view);
-
-    document.title = `History Personas AI — ${
-      path === "/" ? "Anasayfa" : path.slice(1)
-    }`;
-    document.dispatchEvent(
-      new CustomEvent("route:changed", { detail: { path } })
-    );
+    handler(root);
+    setActiveNav(path);
   } catch (err) {
-    console.error("[router error]", err);
-    // Son emniyet: minimal hata görünümü
-    document.getElementById("app").innerHTML = `
-      <section style="padding:16px">
-        <h2>Bir şeyler ters gitti</h2>
-        <pre style="white-space:pre-wrap;color:#b00">${String(err)}</pre>
-        <p><a href="/" data-link>Anasayfa</a></p>
-      </section>`;
+    root.innerHTML = `
+      <section class="error">
+        <h1>Bir şeyler ters gitti</h1>
+        <p style="color:#c44">TypeError: ${err?.message || err}</p>
+        <p><a href="#/">Anasayfa</a></p>
+      </section>
+    `;
+    console.error(err);
   }
 }
 
-// Dışarıdan gezinme
-export function navigate(to) {
-  if (location.pathname !== to) history.pushState({}, "", to);
-  renderPath(to);
+export function initRouter() {
+  window.addEventListener("hashchange", route);
 }
 
-// Geri/ileri
-window.addEventListener("popstate", () => renderPath(getPath()));
-
-// İlk çağrı
-export function router() {
-  renderPath(getPath());
-}
-
-// Aktif link vurgusu
-export function highlightActive() {
-  const p = getPath();
-  document.querySelectorAll("header a[data-link]").forEach((a) => {
-    const u = new URL(a.href, location.origin);
-    a.classList.toggle(
-      "active",
-      u.pathname === p || (p === "/" && u.pathname === "/")
-    );
+// üst menü active durumu
+function setActiveNav(path) {
+  document.querySelectorAll("header .nav a[data-route]").forEach((a) => {
+    a.classList.toggle("active", a.getAttribute("href") === `#${path}`);
   });
 }
-document.addEventListener("route:changed", highlightActive);

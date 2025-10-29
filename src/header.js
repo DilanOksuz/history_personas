@@ -1,91 +1,44 @@
-// === THEME ===
-const themeBtn = document.getElementById("btn-theme");
-const root = document.documentElement;
-function getSystem() {
-  return matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-function applyTheme(pref) {
-  const m = pref === "system" ? getSystem() : pref;
-  root.dataset.theme = m;
-  localStorage.setItem("theme", pref);
-  themeBtn.textContent = m === "dark" ? "🌙" : "☀️";
-}
-(function initTheme() {
-  applyTheme(localStorage.getItem("theme") || "dark");
-})();
-themeBtn?.addEventListener("click", () =>
-  applyTheme(root.dataset.theme === "dark" ? "light" : "dark")
-);
+import { loadSettings, saveSettings } from "./services/storage.js";
 
-// === LANGUAGE ===
-const langBtn = document.getElementById("btn-lang");
-const langText = document.getElementById("lang-current");
-function setCookie(n, v, days = 365) {
-  document.cookie = `${n}=${v}; Max-Age=${days * 86400}; Path=/; SameSite=Lax`;
-}
-function getCookie(n) {
-  return document.cookie
-    .split("; ")
-    .find((x) => x.startsWith(n + "="))
-    ?.split("=")[1];
-}
-function applyLang(l) {
-  document.documentElement.lang = l;
-  langText.textContent = l.toUpperCase();
-  setCookie("lang", l); /* i18n.changeLanguage(l) */
-}
-(function initLang() {
-  applyLang(getCookie("lang") || "en");
-})();
-langBtn?.addEventListener("click", () =>
-  applyLang((document.documentElement.lang || "en") === "en" ? "tr" : "en")
-);
+const s = loadSettings();
 
-// === DROPDOWNS (ayarlar + profil) ===
-document.querySelectorAll("[data-dropdown]").forEach((dd) => {
-  const trigger = dd.querySelector("[data-dropdown-trigger]");
-  const menu = dd.querySelector(".menu");
-  if (!trigger || !menu) return;
-  const open = () => {
-    menu.setAttribute("aria-hidden", "false");
-    trigger.setAttribute("aria-expanded", "true");
-    document.addEventListener("click", onDoc, { once: true });
-    document.addEventListener("keydown", onEsc);
-  };
-  const close = () => {
-    menu.setAttribute("aria-hidden", "true");
-    trigger.setAttribute("aria-expanded", "false");
-    document.removeEventListener("keydown", onEsc);
-  };
-  const onDoc = (e) => {
-    if (!dd.contains(e.target)) close();
-  };
-  const onEsc = (e) => {
-    if (e.key === "Escape") close();
-  };
-  trigger.addEventListener("click", (e) => {
-    e.stopPropagation();
-    trigger.getAttribute("aria-expanded") === "true" ? close() : open();
-  });
-});
+function applyTheme(theme) {
+  const t =
+    theme === "system"
+      ? matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light"
+      : theme;
+  document.documentElement.setAttribute("data-theme", t);
+}
 
-// === SETTINGS menu actions ===
-document.getElementById("clear-history")?.addEventListener("click", () => {
-  Object.keys(localStorage).forEach((k) => {
-    if (k.startsWith("session:")) localStorage.removeItem(k);
-  });
-  alert("All chats cleared.");
-});
-document
-  .getElementById("logout")
-  ?.addEventListener("click", () => alert("Logged out (demo)"));
+applyTheme(s.theme);
+document.documentElement.lang = s.lang;
 
-// === NAV ACTIVE (hash router ile) ===
-function highlightNav() {
-  const cur = location.hash || "#/landing";
-  document.querySelectorAll(".nav-link").forEach((a) => {
-    a.classList.toggle("active", a.getAttribute("href") === cur);
+const themeBtn = document.getElementById("themeToggle");
+const langBtn = document.getElementById("langToggle");
+const settingsBtn = document.getElementById("settingsBtn");
+
+if (themeBtn) {
+  themeBtn.textContent = s.theme === "dark" ? "🌙" : "☀️";
+  themeBtn.addEventListener("click", () => {
+    const cur = loadSettings();
+    cur.theme = cur.theme === "dark" ? "light" : "dark";
+    saveSettings(cur);
+    themeBtn.textContent = cur.theme === "dark" ? "🌙" : "☀️";
   });
 }
-window.addEventListener("hashchange", highlightNav);
-highlightNav();
+
+if (langBtn) {
+  langBtn.textContent = s.lang.toUpperCase();
+  langBtn.addEventListener("click", () => {
+    const cur = loadSettings();
+    cur.lang = cur.lang === "tr" ? "en" : "tr";
+    saveSettings(cur);
+    langBtn.textContent = cur.lang.toUpperCase();
+  });
+}
+
+if (settingsBtn) {
+  settingsBtn.addEventListener("click", () => (location.hash = "#/settings"));
+}

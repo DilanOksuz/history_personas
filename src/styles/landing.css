@@ -1,0 +1,14 @@
+/* ekstra landing detayları */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.categories .chip {
+  cursor: pointer;
+}
+.categories .chip:hover {
+  border-color: var(--chip-active-br);
+  background: var(--chip-active-bg);
+}
