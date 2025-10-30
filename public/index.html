@@ -4,16 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Echoes of History</title>
-    <!-- CSS -->
     <link rel="stylesheet" href="../src/styles/base.css" />
     <link rel="stylesheet" href="../src/styles/header.css" />
     <link rel="stylesheet" href="../src/styles/layout.css" />
     <link rel="stylesheet" href="../src/styles/landing.css" />
     <link rel="stylesheet" href="../src/styles/chat.css" />
     <link rel="stylesheet" href="../src/styles/settings.css" />
+    <link rel="stylesheet" href="../src/styles/login.css" />
+    <link rel="stylesheet" href="../src/styles/sign_up.css" />
   </head>
   <body>
-    <!-- Topbar -->
     <header class="topbar">
       <div class="brand">
         <img
@@ -37,13 +37,13 @@
         <button id="langToggle" class="pill" title="Dil">EN</button>
         <button id="settingsBtn" class="icon-btn" title="Ayarlar">⚙️</button>
         <div class="avatar" aria-hidden="true"></div>
+
+        <a href="#/login" data-route class="btn-login">Giriş Yap</a>
       </div>
     </header>
 
-    <!-- Sayfa içerik alanı -->
     <main id="app" role="main" aria-live="polite"></main>
 
-    <!-- JS -->
     <script type="module" src="../src/header.js"></script>
     <script type="module" src="../src/main.js"></script>
   </body>

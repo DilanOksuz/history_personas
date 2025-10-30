@@ -1,3 +1,6 @@
+const active = JSON.parse(localStorage.getItem("activePersona") || "null");
+// active yoksa landing'e döndürebilirsin
+
 import {
   getSelectedPersona,
   loadSession,

@@ -1,0 +1,106 @@
+// src/routes/signup.js
+export const render = (root) => {
+  root.innerHTML = `
+    <main class="auth-container">
+      <section class="auth-card" aria-labelledby="signin-title">
+        <h1 id="signin-title" class="auth-title" data-i18n="login.title">
+          Giriş Yap
+        </h1>
+
+        <form id="signinForm" class="auth-form" novalidate>
+          <div class="form-group">
+            <label for="email" data-i18n="login.email_label">E-posta</label>
+            <div class="input-with-icon">
+              <span class="icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M3 6h18v12H3z"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M3 7l9 6 9-6"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                </svg>
+              </span>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="E-posta"
+                data-i18n-placeholder="login.email_placeholder"
+                autocomplete="email"
+                required
+                inputmode="email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" data-i18n="login.password_label">Şifre</label>
+            <div class="input-with-icon">
+              <span class="icon" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                  <rect
+                    x="4"
+                    y="10"
+                    width="16"
+                    height="10"
+                    rx="2"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                  <path
+                    d="M8 10V8a4 4 0 1 1 8 0v2"
+                    stroke="currentColor"
+                    stroke-width="1.6"
+                  />
+                </svg>
+              </span>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Şifre"
+                data-i18n-placeholder="login.password_placeholder"
+                autocomplete="current-password"
+                required
+                minlength="6"
+              />
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="btn-primary"
+            data-i18n="login.submit_btn"
+          >
+            Giriş Yap
+          </button>
+
+          <div class="auth-links">
+            <a href="#" class="link-muted" data-i18n="login.forgot_password">
+              Şifreni mi unuttun?
+            </a>
+            <hr class="divider" />
+            <p class="small">
+              <span data-i18n="login.no_account">Hesabın yok mu?</span>
+              <a href="#/signup" class="link-strong" data-i18n="login.signup_link">
+                Kaydol
+              </a>
+            </p>
+          </div>
+        </form>
+      </section>
+    </main>
+  `;
+
+  const form = document.getElementById("signupForm");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    // basit örnek: başarılı say ve login’e yönlendir
+    window.location.hash = "#/login";
+  });
+};

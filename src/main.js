@@ -1,7 +1,8 @@
-import { route, initRouter } from "./router.js";
+// src/main.js
+import { initRouter, route } from "./router.js";
 
-// ilk açılış
+// açılışta bir kere çiz ve listener’ı kur
 window.addEventListener("DOMContentLoaded", () => {
+  route();
   initRouter();
-  route(); // mevcut hash'e göre yükle
 });
