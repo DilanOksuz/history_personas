@@ -67,3 +67,75 @@ export function deleteAllSessions() {
   });
   LS.del(KEYS.sessions);
 }
+
+// src/services/storage.js
+export function getUsers() {
+  try {
+    return JSON.parse(localStorage.getItem("kullanicilar") || "[]");
+  } catch {
+    return [];
+  }
+}
+export function saveUsers(list) {
+  localStorage.setItem("kullanicilar", JSON.stringify(list || []));
+}
+
+export function setCurrentUserEmail(email) {
+  if (email) localStorage.setItem("currentUserEmail", email);
+  else localStorage.removeItem("currentUserEmail");
+  // header vb. yerleri güncelle
+  window.dispatchEvent(new CustomEvent("auth:update"));
+}
+export function getCurrentUser() {
+  const email = localStorage.getItem("currentUserEmail");
+  if (!email) return null;
+  return getUsers().find((u) => u.email === email) || null;
+}
+export function signOut() {
+  localStorage.removeItem("currentUserEmail");
+  window.dispatchEvent(new CustomEvent("auth:update"));
+}
+
+export function buildInitials(first, last) {
+  const a = (first || "").trim(),
+    b = (last || "").trim();
+  const i1 = a ? a[0].toUpperCase() : "",
+    i2 = b ? b[0].toUpperCase() : "";
+  return i1 + i2 || i1 || i2 || "?";
+}
+export function makeInitialsAvatar(first, last, size = 128) {
+  const initials = buildInitials(first, last);
+  const canvas = document.createElement("canvas");
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext("2d");
+  const hue = hashToHue((first + last).toLowerCase());
+  ctx.fillStyle = `hsl(${hue},45%,35%)`;
+  ctx.fillRect(0, 0, size, size);
+  ctx.globalCompositeOperation = "destination-in";
+  rounded(ctx, 0, 0, size, size, size / 2);
+  ctx.fill();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = "#fff";
+  ctx.font = `bold ${Math.floor(
+    size * 0.45
+  )}px system-ui,-apple-system,Segoe UI,Roboto`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText(initials, size / 2, size / 2);
+  return canvas.toDataURL("image/png");
+}
+function hashToHue(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) >>> 0;
+  return h % 360;
+}
+function rounded(ctx, x, y, w, h, r) {
+  const rr = Math.min(r, w / 2, h / 2);
+  ctx.beginPath();
+  ctx.moveTo(x + rr, y);
+  ctx.arcTo(x + w, y, x + w, y + h, rr);
+  ctx.arcTo(x + w, y + h, x, y + h, rr);
+  ctx.arcTo(x, y + h, x, y, rr);
+  ctx.arcTo(x, y, x + w, y, rr);
+  ctx.closePath();
+}

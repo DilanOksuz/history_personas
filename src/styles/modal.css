@@ -1,131 +1,212 @@
-/* ======= Modal (Persona Info) ======= */
+/* ===== Modal (Persona Details) ===== */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px);
   display: grid;
   place-items: center;
-  background: rgba(0, 0, 0, 0.55);
-  backdrop-filter: blur(3px);
   z-index: 1000;
-  animation: fadeIn 0.12s ease;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  padding: 28px 16px;
 }
 
 .modal-card {
-  width: min(720px, 92vw);
-  background: var(--panel);
-  color: var(--text);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  width: 100%;
+  max-width: 720px; /* görseldeki kart genişliği */
+  background: var(--surface, #242019);
+  color: var(--ink, #f3efe4);
+  border-radius: 16px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+  padding: 28px 28px 22px;
   position: relative;
-  overflow: hidden;
 }
 
+/* kapatma butonu */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  background: transparent;
+  color: var(--ink, #f3efe4);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* içerik gövdesi */
 .modal-body {
-  padding: 26px 26px 20px;
+  padding: 4px 4px 0;
 }
 
+/* üst başlık alanı */
 .modal-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: 88px 1fr;
+  gap: 18px;
   align-items: center;
-  gap: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+  position: relative;
 }
 
 .modal-avatar {
-  width: 84px;
-  height: 84px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  display: block;
+  border: 2px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+}
+
+.modal-title h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+.modal-meta {
+  color: var(--muted, #bfb59e);
+  font-size: 14px;
+}
+
+/* iki kolonlu bilgi ızgarası */
+.meta-grid {
+  display: grid;
+  grid-template-columns: 140px 1fr; /* solda etiket, sağda değer */
+  gap: 10px 18px;
+  margin-top: 8px;
+}
+
+.meta-grid .label {
+  color: var(--muted, #bfb59e);
+  font-size: 14px;
+}
+.meta-grid .value {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* alıntı tonunda metin */
+.meta-grid .value em,
+.meta-grid .value q,
+.meta-grid .value i {
+  color: #d8cfae;
+  font-style: italic;
+}
+
+/* linkler */
+.modal-links a {
+  color: var(--accent, #e3b341);
+  text-decoration: none;
+  margin-right: 14px;
+  font-weight: 600;
+}
+.modal-links a:hover {
+  text-decoration: underline;
+}
+
+/* alt çizgi ve buton alanı */
+.modal-actions {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.btn {
+  height: 42px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.08));
+  background: transparent;
+  color: var(--ink, #f3efe4);
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.btn.primary {
+  background: var(--accent, #e3b341);
+  color: var(--accent-ink, #1a160e);
+  border: none;
+  padding: 0 18px;
+  box-shadow: 0 8px 22px rgba(227, 179, 65, 0.35);
+}
+.btn.primary:hover {
+  filter: brightness(1.05);
+}
+
+/* küçük ekranlar */
+@media (max-width: 600px) {
+  .modal-card {
+    padding: 22px 18px 18px;
+  }
+  .modal-header {
+    grid-template-columns: 64px 1fr;
+    gap: 12px;
+  }
+  .modal-avatar {
+    width: 64px;
+    height: 64px;
+  }
+  .modal-title h2 {
+    font-size: 22px;
+  }
+  .meta-grid {
+    grid-template-columns: 120px 1fr;
+  }
+}
+/* === Avatar'ı ortala ve yukarı taşı === */
+.modal-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.modal-avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
 .modal-title {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
+
 .modal-title h2 {
-  margin: 0;
   font-size: 26px;
+  font-weight: 800;
+  margin: 8px 0 4px;
 }
+
 .modal-meta {
-  color: var(--muted);
-  margin-top: 2px;
+  font-size: 14px;
+  color: var(--muted, #bfb59e);
 }
 
+/* başlık ve bilgi bölümü arası boşluk */
 .meta-grid {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 10px 18px;
-  margin-top: 14px;
-  font-size: 15px;
-}
-
-.meta-grid .label {
-  color: var(--muted);
-}
-.meta-grid .value {
-  color: var(--text);
-}
-
-.modal-links {
-  display: flex;
-  gap: 14px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-}
-.modal-links a {
-  color: var(--accent);
-  text-decoration: none;
-  border-bottom: 1px dashed rgba(240, 185, 11, 0.45);
-}
-.modal-links a:hover {
-  opacity: 0.85;
-}
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  padding: 12px 16px 16px;
-  border-top: 1px solid var(--border);
-  background: color-mix(in oklab, var(--panel) 92%, black);
-}
-
-.btn {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--bg);
-  color: var(--text);
-  cursor: pointer;
-}
-.btn.primary {
-  background: var(--accent);
-  color: #15120c;
-  border-color: transparent;
-  font-weight: 700;
-}
-
-.modal-close {
-  position: absolute;
-  top: 8px;
-  right: 10px;
-  background: transparent;
-  border: 0;
-  color: var(--muted);
-  font-size: 22px;
-  cursor: pointer;
-}
-.modal-close:hover {
-  color: var(--text);
+  margin-top: 12px;
 }

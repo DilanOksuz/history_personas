@@ -12,16 +12,11 @@
     <link rel="stylesheet" href="../src/styles/settings.css" />
     <link rel="stylesheet" href="../src/styles/login.css" />
     <link rel="stylesheet" href="../src/styles/sign_up.css" />
+    <link rel="stylesheet" href="../src/styles/modal.css" />
   </head>
   <body>
     <header class="topbar">
       <div class="brand">
-        <img
-          src="assets/logo.png"
-          alt="Echoes of History"
-          width="20"
-          height="20"
-        />
         <span class="brand-title">Echoes of History</span>
       </div>
 
@@ -31,14 +26,15 @@
         <a href="#/history" data-route>My Echoes</a>
         <a href="#/community" data-route>Community</a>
       </nav>
-
+      <div class="auth-buttons">
+        <a href="#/login" class="btn-login">Giriş Yap</a>
+        <a href="#/signup" class="btn-signup">Kaydol</a>
+      </div>
       <div class="user">
         <button id="themeToggle" class="pill" title="Tema">🌙</button>
         <button id="langToggle" class="pill" title="Dil">EN</button>
         <button id="settingsBtn" class="icon-btn" title="Ayarlar">⚙️</button>
         <div class="avatar" aria-hidden="true"></div>
-
-        <a href="#/login" data-route class="btn-login">Giriş Yap</a>
       </div>
     </header>
 

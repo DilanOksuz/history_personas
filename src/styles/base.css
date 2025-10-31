@@ -71,7 +71,7 @@ h3 {
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #eee url("https://i.pravatar.cc/60") center/cover;
+  background: #eee center/cover;
 }
 
 .error {

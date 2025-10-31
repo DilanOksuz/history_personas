@@ -60,3 +60,42 @@
 .user .icon-btn:hover {
   opacity: 0.8;
 }
+
+/* ===== Auth Buttons (Giriş / Kaydol) ===== */
+.auth-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-left: 12px;
+}
+
+.auth-buttons a {
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 6px 14px;
+  font-size: 14px;
+  transition: all 0.25s ease;
+}
+
+/* Giriş Yap */
+.auth-buttons .btn-login {
+  color: var(--ink, #f4f1e5);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.auth-buttons .btn-login:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Kaydol */
+.auth-buttons .btn-signup {
+  color: var(--surface, #1a140c);
+  background: var(--accent, #e3b341);
+  border: 1px solid transparent;
+  font-weight: 700;
+  box-shadow: 0 4px 12px rgba(227, 179, 65, 0.25);
+}
+.auth-buttons .btn-signup:hover {
+  filter: brightness(1.05);
+}
